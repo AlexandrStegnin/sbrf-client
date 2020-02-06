@@ -32,7 +32,6 @@ public class RestService {
 
     public String getUserInfo() {
         String url = String.format("http://%s:%d/secured", proxy.getHostName(), port);
-        System.out.println(url);
         return restTemplate.getForObject(url, String.class);
     }
 
