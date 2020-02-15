@@ -9,6 +9,8 @@ import org.springframework.web.client.RestTemplate;
 
 import java.net.InetAddress;
 
+import static com.stegnin.sbrfclient.util.Constant.DEFAULT_API_PORT;
+
 /**
  * @author Alexandr Stegnin
  */
@@ -32,6 +34,11 @@ public class RestService {
 
     public String getUserInfo() {
         String url = String.format("http://%s:%d/secured", proxy.getHostName(), port);
+        try {
+            restTemplate.getForObject(url, String.class);
+        } catch (Exception ex) {
+            url = String.format("http://%s:%d/secured", proxy.getHostName(), DEFAULT_API_PORT);
+        }
         return restTemplate.getForObject(url, String.class);
     }
 
